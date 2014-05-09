@@ -1,0 +1,58 @@
+html {
+	font-size: 12px;
+	font-family: "Ubuntu", "Segoe UI", Tahoma;
+	text-shadow: 0.5px 0.5px rgba(0, 0, 0, 0.1);
+}
+
+body {
+	min-width: 400px;
+	padding-right: 10px;
+}
+
+div.headline {
+	font-size: 90%;
+	margin-bottom: 10px;
+	padding: 1.5px;
+}
+
+div.headline div {
+	float: right;
+	background: url("../images/refresh.png");
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	text-indent: -9999px;
+}
+
+thead tr {
+	font-weight: bold;
+	font-size: 120%;
+}
+
+thead tr td {
+	border-bottom: 1px solid #c2c2c2;
+}
+
+tbody tr.new {
+	background-color: #01FF70;
+}
+
+tr:nth-child(even) {
+	background-color: #eee;
+}
+
+tr td:nth-child(3) {
+	text-align: right;
+}
+
+td {
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 300px;
+	text-overflow: ellipsis;
+}
+
+td.video-link {
+	cursor: pointer;
+	text-decoration: underline;
+}
