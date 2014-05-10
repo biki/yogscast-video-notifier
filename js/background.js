@@ -13,15 +13,9 @@
 		var db = chrome.storage.local;
 		
 		db.get(null, function(result) {
-			/*
-			var newestVidData = null;
-			if (result.newestVideo !== "undefined") {
-				newestVidData = result.newestVideo;
-			}
-			*/
 			
 			$.get(URL_RECENT_VIDEOS, function(r) {
-				var firstVid = true, allVids = [];
+				var allVids = [];
 				
 				$(r).find("article#latest li figure").each(function() {
 					var fig = $(this), data = {};
@@ -67,38 +61,28 @@
 					}
 					
 					if (data.isNew) {
-						chrome.browserAction.setBadgeText({
-							text : "NEW"
-						});
-					} else {
-						chrome.browserAction.setBadgeText({
-							text : ""
-						});
+						oneNewVid = true;
 					}
-	
-					/*
-					if (firstVid) {
-						if (newestVidData != null && data.videoId != newestVidData.videoId) {
-							// a new video was posted
-							chrome.browserAction.setBadgeText({
-								text : "NEW"
-							});
-						} else {
-							// no new videos
-							chrome.browserAction.setBadgeText({
-								text : ""
-							});
-						}
-						
-						firstVid = false;
-						db.set({
-							"newestVideo" : data
-						});
-					}
-					*/
 					
 					allVids.push(data);
 				});
+				
+				var newVids = 0;
+				$.each(allVids, function(key, value) {
+					if (value.isNew) {
+						newVids++;
+					}
+				});
+				
+				if (newVids > 0) {
+					chrome.browserAction.setBadgeText({
+						text : "" + newVids
+					});
+				} else {
+					chrome.browserAction.setBadgeText({
+						text : ""
+					});
+				}
 				
 				db.set({
 					"cachedVids": allVids,
